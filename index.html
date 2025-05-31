@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Envíos - Uñas de la Monse Productos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff8fa; /* Suavemente rosado para evitar el blanco puro */
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            overflow: hidden;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(75deg, #ff6b9d 0%, #ff8a80 50%, #ffc1e3 100%);
+            color: white;
+            padding: 25px 30px;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 5px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 15px,
+                rgba(255,255,255,0.1) 15px,
+                rgba(255,255,255,0.1) 30px
+            );
+            animation: move 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes move {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 0;
+            position: relative;
+            z-index: 1;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4), 
+                         -1px -1px 0 rgba(255,255,255,0.2);
+            letter-spacing: 1.5px;
+            font-weight: 900;
+        }
+
+        .header .logo {
+            position: relative;
+            z-index: 1;
+            height: 120px;
+            width: auto;
+            border-radius: 15px;
+            object-fit: contain;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .header .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .info-box h3 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-box li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-box li:last-child {
+            border-bottom: none;
+        }
+
+        .form-container {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.2s; }
+        .form-group:nth-child(3) { animation-delay: 0.3s; }
+        .form-group:nth-child(4) { animation-delay: 0.4s; }
+        .form-group:nth-child(5) { animation-delay: 0.5s; }
+        .form-group:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            font-size: 1em;
+            background: linear-gradient(145deg, #fdf2f6, #fff0f4); /* tono rosa suave */
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #ff6b9d;
+            box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .required {
+            color: #ff6b9d;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #5a67d8, #6b5b95);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .success-message, .error-message {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .header .logo {
+                height: 100px;
+            }
+
+            .form-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Formulario Para Envíos</h1>
+            <img src="logo1.png" alt="Uñas de la Monse Logo" class="logo">
+        </div>
+
+        <div class="info-box">
+            <h3><span>📦</span> Todo lo que necesitas saber sobre tu envío</h3>
+            <ul>
+                <li><span>⏱️</span> Los envíos se hacen al día siguiente realizado el pago total</li>
+                <li><span>🚚</span> Envíos únicamente por Servientrega</li>
+                <li><span>💳</span> Es necesario completar el pago antes del envío</li>
+                <li><span>📋</span> Estar seguro de realizar su pago. <br>No hay devolución ni reembolso por ningún motivo, muchas gracias.</li>
+            </ul>
+        </div>
+
+        <div class="success-message" id="success-message">
+            ✅ ¡Solicitud enviada correctamente! Revisa tu WhatsApp para confirmar el envío.
+        </div>
+
+        <div class="error-message" id="error-message">
+            ❌ Error al enviar la solicitud. Por favor, intenta nuevamente.
+        </div>
+
+        <form class="form-container" id="envioForm">
+            <div class="form-group">
+                <label for="nombre">Nombres <span class="required">*</span></label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+
+            <div class="form-group">
+                <label for="apellido">Apellidos <span class="required">*</span></label>
+                <input type="text" id="apellido" name="apellido" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cedula">Cédula <span class="required">*</span></label>
+                <input type="text" id="cedula" name="cedula" required>
+            </div>
+
+            <div class="form-group">
+                <label for="direccion">Dirección Completa <span class="required">*</span></label>
+                <textarea id="direccion" name="direccion" rows="3" placeholder="Incluye ciudad, barrio, calle, número, referencias..." required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="producto">Especifica tu Producto <span class="required">*</span></label>
+                <textarea id="producto" name="producto" rows="3" placeholder="Describe detalladamente el producto que deseas (colores, cantidad, referencias, etc.)" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="comentarios">Comentarios Adicionales</label>
+                <textarea id="comentarios" name="comentarios" rows="3" placeholder="¿Tienes algún comentario o instrucción especial para tu envío?"></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+                Enviar Solicitud de Envío
+            </button>
+        </form>
+
+        <div class="footer">
+            <p>Gracias por confiar en Uñas de la Monse Productos 💖</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('envioForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            const successMsg = document.getElementById('success-message');
+            const errorMsg = document.getElementById('error-message');
+
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="loading"></span>Enviando...';
+
+            const formData = {
+                nombre: document.getElementById('nombre').value,
+                apellido: document.getElementById('apellido').value,
+                cedula: document.getElementById('cedula').value,
+                direccion: document.getElementById('direccion').value,
+                producto: document.getElementById('producto').value,
+                comentarios: document.getElementById('comentarios').value
+            };
+
+            const whatsappNumber = '593989588988';
+            const title = 'Formulario de compras';
+            const note = '👇 Por favor, adjunta una foto de referencia del producto que deseas para evitar confusiones. ¡Gracias!';
+
+
+            try {
+                await sendToWhatsApp(formData, whatsappNumber, title, note);
+                successMsg.style.display = 'block';
+                this.reset();
+            } catch (error) {
+                console.error('Error al enviar la solicitud:', error);
+                errorMsg.style.display = 'block';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Enviar Solicitud de Envío';
+            }
+        });
+
+        async function sendToWhatsApp(data, whatsappNumber, title, note) {
+            let message = `🆕 *${title}*\n\n` +
+                          `👤 *Cliente:* ${data.nombre} ${data.apellido}\n` +
+                          `🆔 *Cédula:* ${data.cedula}\n` +
+                          `📍 *Dirección:* ${data.direccion}\n` +
+                          `🛍 *Producto:* ${data.producto}\n`;
+
+            if (data.comentarios) {
+                message += `\n📝 *Comentarios:* ${data.comentarios}\n`;
+            }
+
+            message += `\n*Nota:* ${note}`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber.replace(/[^0-9]/g, '')}&text=${encodedMessage}`;
+
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
